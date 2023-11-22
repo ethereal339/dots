@@ -1,0 +1,24 @@
+!#/usr/bin/bash
+
+# variables
+config=$HOME/.config/hypr
+scripts=$config/scripts
+
+# notifications
+dunst &
+
+# eww clock
+~/.config/eww/eww daemon &
+~/.config/eww/eww open-many clock &
+
+# waybar
+$scripts/launch_waybar &
+
+# wallpaper
+$scripts/wall $config/wallpapers/wallpaper.png &
+
+# other
+$config/xdg-portal-hyprland &
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP &
